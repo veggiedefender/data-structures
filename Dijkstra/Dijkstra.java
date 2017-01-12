@@ -95,19 +95,19 @@ public class Dijkstra {
         }
 
         while (!heap.isEmpty()) {
-            int v = heap.peekNode();
+            int u = heap.peekNode();
             heap.delete();
 
             //iterate over adjacent nodes
-            for (int i = 0; i < graphSize; i++) {
+            for (int v = 0; v < graphSize; v++) {
                 //check if there's a path
-                if (i != v && graph[v][i] != -1) {
-                    int length = dist[v] + graph[v][i];
+                if (graph[u][v] > 0) {
+                    int length = dist[u] + graph[u][v];
                     //update distance if shorter
-                    if (length < dist[i]) {
-                        dist[i] = length;
-                        prev[i] = v;
-                        heap.insert(length, i);
+                    if (length < dist[v]) {
+                        dist[v] = length;
+                        prev[v] = u;
+                        heap.insert(length, v);
                     }
                 }
             }
