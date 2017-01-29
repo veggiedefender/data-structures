@@ -83,15 +83,14 @@ public class Dijkstra {
         //Set up dist, prev
         for(int v = 0; v < graphSize; v++) {
             int distance;
-            if (v == start) {
-                distance = 0;
-            } else {
+            if (v != start) {
                 //basically infinite
                 distance = Integer.MAX_VALUE;
+                dist[v] = distance;
+                prev[v] = -1;
+            } else {
+                heap.insert(0, v);
             }
-            dist[v] = distance;
-            prev[v] = -1;
-            heap.insert(distance, v);
         }
 
         while (!heap.isEmpty()) {
@@ -120,7 +119,6 @@ public class Dijkstra {
             solution.add(0, curr);
             curr = prev[curr];
         }
-        solution.add(0, curr);
         
         return solution;
     }
